@@ -13,43 +13,56 @@ module AccountModuleService
   module InstanceMethods
     private
 
-    def redirect_to_after_call service, model_instance, fail_path
-      if service.call
+    def redirect_to_after_call
+      if @service_instance.call
         flash[:notice] = 'Successfully update'
-        #redirect_to [:admin, :accounts]
-        redirect_to [fail_path, :admin, model_instance]
+        redirect_to [:admin, @model_instance.class.to_s.underscore.pluralize]
       else
         # TODO notice errors ap create_account_service.errors
-        redirect_to [fail_path, :admin, model_instance]
+        flash[:error] = 'something went wrong'
+        if @fail_path == :new
+          redirect_to [@fail_path, :admin, @model_instance.class.to_s.underscore]
+        else
+          redirect_to [@fail_path, :admin, @model_instance]
+        end
       end
+    end
+
+    def find_model_instance class_name
+      # TODO model can be conf
+      model = Object.const_get class_name
+      case params[:action].to_sym
+      when :create
+        @model_instance = model.new
+        @fail_path      = :new
+      when :update
+        @model_instance = model.find params[:id]
+        @fail_path      = :edit
+      end 
+    end
+
+    def find_service_instance
+      service = Object.const_get(@model_instance.class.to_s)
+      .const_get "#{params[:action].capitalize}#{@model_instance.class}Service"
+      @service_instance = service.new params, @model_instance
     end
   end
 
   module ClassMethods
     def respond_with_service class_name, conf
       conf[:actions].each do |action|
-        # TODO model can be conf
-        model   = Object.const_get class_name
-        #service = Object.const_get "#{class_name}Service"
-        define_method action do 
-          case action
-          when :create
-            model_instance = model.new
-            fail_path      = :new
-            service        = Object.const_get(class_name)
-              .const_get "Create#{class_name}Service"
-          when :update
-            model_instance = model.find params[:id]
-            fail_path      = :edit
-            service        = Object.const_get(class_name)
-              .const_get "Update#{class_name}Service"
-          end 
-          service_instance = service.new params, model_instance
-          redirect_to_after_call service_instance, 
-            model_instance, fail_path
-        end
+        self.create_action action, class_name
       end
     end
+
+    def create_action action, class_name
+      define_method action do 
+        find_model_instance class_name
+        find_service_instance
+        redirect_to_after_call
+      end
+    end
+
   end
 end
 

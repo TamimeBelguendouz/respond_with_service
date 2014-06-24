@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = RespondWithService::VERSION
   spec.authors       = ["Pierre-Alexandre Piarulli"]
   spec.email         = ["go@rubyrock.me"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{like respond_with but with service.}
+  spec.description   = %q{first write for none standar database + active_admin app and then open as a gem}
   spec.homepage      = ""
   spec.license       = "MIT"
 
