@@ -14,6 +14,16 @@ module AccountModuleService
     private
 
     def redirect_to_after_call
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
+      ap '================================ yeah ==========='
       if @service_instance.call
         flash[:notice] = 'Successfully update'
         redirect_to [:admin, @model_instance.class.to_s.underscore.pluralize]
@@ -66,5 +76,5 @@ module AccountModuleService
   end
 end
 
-class ActiveAdmin::ResourceController
-end 
+#class ActiveAdmin::ResourceController
+#end 
