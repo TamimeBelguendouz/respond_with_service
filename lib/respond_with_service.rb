@@ -1,10 +1,6 @@
 require "respond_with_service/version"
 
 module RespondWithService
-  # Your code goes here...
-end
-
-module AccountModuleService
   def self.included base
     base.send :include, InstanceMethods
     base.extend ClassMethods
@@ -14,16 +10,6 @@ module AccountModuleService
     private
 
     def redirect_to_after_call
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
-      ap '================================ yeah ==========='
       if @service_instance.call
         flash[:notice] = 'Successfully update'
         redirect_to [:admin, @model_instance.class.to_s.underscore.pluralize]
@@ -35,6 +21,9 @@ module AccountModuleService
         else
           redirect_to [@fail_path, :admin, @model_instance]
         end
+        
+
+
       end
     end
 
@@ -75,6 +64,3 @@ module AccountModuleService
 
   end
 end
-
-#class ActiveAdmin::ResourceController
-#end 
