@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["go@rubyrock.me"]
   spec.summary       = %q{like respond_with but with service.}
   spec.description   = %q{first write for none standar database + active_admin app and then open as a gem}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/ranska/respond_with_service"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -20,4 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.5"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec", "~> 2.6"
 end

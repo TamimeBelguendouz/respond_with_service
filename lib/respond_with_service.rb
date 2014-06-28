@@ -1,6 +1,13 @@
 require "respond_with_service/version"
 
 module RespondWithService
+  class Toto
+  def self.hello
+    'hi'
+  end
+  end
+
+
   def self.included base
     base.send :include, InstanceMethods
     base.extend ClassMethods
