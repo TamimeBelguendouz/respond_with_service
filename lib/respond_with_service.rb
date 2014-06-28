@@ -14,6 +14,10 @@ module RespondWithService
   end
 
   module InstanceMethods
+    def foo
+      'bar'
+    end
+
     private
 
     def redirect_to_after_call
@@ -28,9 +32,6 @@ module RespondWithService
         else
           redirect_to [@fail_path, :admin, @model_instance]
         end
-        
-
-
       end
     end
 
