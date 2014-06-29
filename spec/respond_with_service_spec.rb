@@ -13,8 +13,8 @@ describe RespondWithService do
   describe 'InstanceMethods' do
     before :each do
       @test_class = TestRespondWithService.new
-
     end
+
     it "instance method" do
       @test_class.foo.should eql("bar")
     end

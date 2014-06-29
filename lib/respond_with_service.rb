@@ -62,6 +62,8 @@ module RespondWithService
       end
     end
 
+    private
+
     def create_action action, class_name
       define_method action do 
         find_model_instance class_name
@@ -71,4 +73,5 @@ module RespondWithService
     end
 
   end
+
 end

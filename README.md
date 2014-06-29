@@ -1,5 +1,7 @@
 respond_with_service
 ====================
+[![Code
+Climate](https://codeclimate.com/github/ranska/respond_with_service.png)](https://codeclimate.com/github/ranska/respond_with_service)
 
 i use it in active admin (respond with a service instaded of a model)
 
